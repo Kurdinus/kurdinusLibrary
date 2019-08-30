@@ -1,0 +1,188 @@
+body {
+	margin: auto;
+	font-family: Segoe UI, Tahoma;
+	color: #444;
+	text-align: center;
+	font-size: 14px;
+	background-color: #f6f8fa;
+}
+.error {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	color: red;
+	font-size: 16px;
+	padding: 30px;
+}
+.error h1 {
+	color: Red;
+}
+.title {
+	font-size: 20px;
+	padding-top: 10px;
+	max-width: 800px;
+	width: 100%;
+	display: inline-block;
+}
+.selectedTab {
+	padding: 5px;
+	max-width: 800px;
+	background-color: #fff;
+	margin: auto;
+}
+.navbar{
+	padding-top: 10px;
+	border-bottom: 1px solid #d1d5da;
+}
+textarea {
+	text-align: center;
+	font-family: Segoe UI, Tahoma;
+	line-height:1.5em;
+	height: 180px;
+	margin-top: 5px;
+	padding: 5px;
+	width: 100%;
+	border-radius: 5px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.textout {
+	line-height: 1.5em;
+	margin: auto;
+	width: 100%;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+select {
+	font-family: Segoe UI, Tahoma;
+	border-radius: 5px;
+	padding: 5px;
+}
+pre {
+	font-family: Segoe UI, Tahoma;
+	padding: 5px;
+	max-height: 300px;
+	overflow: auto;
+	min-height: 80px;
+	max-height: 200px;
+	background-color: #f5f5f5;
+	white-space: pre-wrap; /* CSS 3 */
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+.option {
+	padding: 5px;
+	margin: 5px;
+}
+.nav-item {
+	user-select: none;
+	display: inline-block;
+	padding: 1px 6px 4px;
+	color: #777;;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-bottom: 0;
+	margin-bottom: -1px;
+}
+.nav-item:hover {
+	color:#333;
+}
+.nav-item.active {
+	color: #24292e;
+	background-color: #fff;
+	border-color: #4184f3 #e1e4e8 transparent;
+	border-radius: 5px 5px 0 0;
+}
+.btn-danger {
+	width: 120px;
+	user-select: none;
+	color: #fff;
+	display: inline-block;
+	background-color: #4184f3;
+	border-radius: 5px;
+	padding: 5px;
+	user-select: none;
+	cursor: pointer;
+}
+.btn-light {
+	user-select: none;
+	display: inline-block;
+	padding: 5px;
+	cursor: pointer;
+	background-color: #eee;
+	border-color: #f8f9fa;
+	border-radius: 5px;
+}
+.btn-light:hover {
+	cursor: pointer;
+	display: inline-block;
+	font-family: inherit;
+}
+.hidden {
+	display: none;
+}
+.visible {
+	display: block;
+}
+.Keyboard {
+	width: 100%;
+	font-family: Tahoma;
+}
+.key {
+	user-select: none;
+	display: inline-block;
+	background-color: #f4f4f4;
+	border-color: #e2e2e2;
+	border-radius: 2px;
+	min-width: 21px;
+	margin: 1px;
+	height: 32px;
+	padding: 5px 3px 0 3px;
+	cursor: pointer;
+}
+.key:hover {
+	box-shadow: 0 0 2px #888;
+}
+.keyFunc {
+	user-select: none;
+	display: inline-block;
+	border-radius: 2px;
+	margin: 1px;
+	background-color: #ddd;
+	padding-top: 5px;
+	height: 32px;
+	cursor: default;
+}
+.keyFunc:hover {
+	box-shadow: 0 0 2px #888;
+}
+.keyGroup {
+	display: inline-block;
+	padding: 5px;
+}
+a {
+	text-decoration: none;
+	color: #889;
+}
+#footer {
+	text-align: center;
+	display: block;
+	direction: ltr;
+	width: 100%;
+	padding: 10px 0;
+	margin-top: 5px;
+	color: #9aa;
+}
+@media only screen and (max-width:500px) {
+	#Keyboard, #KeyboardShifted, #KeyboardLayoutType {
+		display: none;
+	}
+}
+@media only screen and (min-width:500px) {
+	#KeyboardMobile {
+		display: none;
+	}
+}

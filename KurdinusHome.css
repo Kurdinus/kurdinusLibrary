@@ -1,0 +1,84 @@
+body {
+	font-size: 14px;
+	margin: auto;
+	font-family: Segoe UI, Tahoma;
+	color: #7B90A1;
+	text-align: center;
+}
+a {
+	text-decoration: none;
+	color: #5F6368;
+}
+a:hover {
+	color: black;
+}
+h1 {
+	font-size: 35px;
+	margin: 0;
+}
+h2 {
+	font-size: 20px;
+	margin: 5px 0 2px 0;
+	color: #34485E;
+}
+h3 {
+	font-size: 14px;
+	margin: 3px 0 0 0;
+}
+p{
+	margin: 0;
+}
+.title {
+	margin: 10px 0;
+	padding-top: 10px;
+	width: 100%;
+	display: inline-block;
+	max-width:700px;
+}
+.nav{
+	width: 100%;
+	display: inline-block;
+	max-width:700px;
+}
+.specs{
+	max-width: 500px;
+    margin: 30px auto;
+	background-color: #eee;
+	padding: 10px;
+	border-radius: 24px;
+}
+.section{
+	margin: 10px;
+	padding: 10px;
+	background-color: #f7f8fa;
+	border-radius: 10px;
+	border: 1px solid #e3e3e3;
+}
+.section:hover{
+	border-color: #4184f3;
+}
+.section2{
+	padding: 5px;
+	color: #444;
+}
+.section2 p{
+	font-size: 12px;
+}
+#footer {
+	text-align: center;
+	display: block;
+	direction: ltr;
+	width: 100%;
+	padding: 10px 0;
+	color: #9aa;
+}
+@media only screen and (max-width:500px) {
+	#Keyboard, #KeyboardShifted, #KeyboardLayoutType {
+		display: none;
+	}
+}
+@media only screen and (min-width:500px) {
+	#KeyboardMobile {
+		display: none;
+	}
+}

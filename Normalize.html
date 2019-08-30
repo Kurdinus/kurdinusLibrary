@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ckb" dir="rtl" >
+<head>
+	<title>Kurdînûs 2019</title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content= "width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="kurdish,kurdish transliteration,kurdish alphabet converter,kurdish normalizer,kurdinus,کوردی نووس,کوردینوس,کوردینووس,پەڵک,یونیکۆد,یوونکۆد,گۆڕینی ئەلفوبێ,تایپی کوردی,تەختەکلیلی کوردی,کوردی" />
+	<meta name="description" content="بەرنامەیەک بۆ تایپ، گۆڕینی ئەلفوبێ و ستاندارد کردنی خاڵبەندی و یوونیکۆدی کورد" />
+	<link rel="stylesheet" href="kurdinus.css">
+</head>
+<body onload="initialize();" style="direction: rtl;">
+	<noscript>
+		<div class="error">
+			<h1>وێبگەڕەکەت ناهێڵێت سکریپتەکان کار بکەن</h1>
+			<p>ئەگەر Internet Explorer بە کار دێنیت، لەسەر Allow Blocked Content دا کلیک بکە.</p>
+			<a href="http://www.enable-javascript.com/" target="_blank">How to enable JavaScript in your browser</a>
+		</div>
+	</noscript>
+	<!--[if lt IE 8]>
+		<style type="text/css">
+			#main { width: 570px; }
+			.max #main { width: 98%; }
+		</style>
+	<![endif]-->
+	<div class="title">
+		<b><a href="http://kurdinus.com/" target="_self">Kurdînûs 2019</a></b>
+		<div style="font-size:16px;" class="navbar">
+			<div class="nav-item"><a href="Type.html">تایپ</a></div>
+			<div class="nav-item"><a href="Transliterate.html">گۆڕینی‌ئەلفوبێ</a></div>
+			<div class="nav-item active">خاوێنکردنەوە</div>
+			<div class="nav-item"><a href="Unicode.html">بەیوونیکۆدکردن</a></div>
+		</div>
+	</div>
+	<div id="TabNormalize" class="selectedTab">	
+		<textarea id="inputNormalize" placeholder="بۆ ستاندارد کردنی خاڵبەندی و یوونیکۆد دەقێکی کوردی بخەرە ئێرە" spellcheck="false"
+		onblur="Normalize()" onkeyup="Normalize()" onmousedown="Normalize()" onmouseup="Normalize()"></textarea>
+		<div class="textout"><pre id="outputNormalize"></pre></div>
+		<div id="btnCopyNormalize" onclick="CopyOutput()">کۆپی</div>
+		<div id="btnClearNormalize" onclick="clearAll()">سڕینەوە</div>
+		<div class="option">
+			جۆری ژمارەکان:
+			<select id="NumTypeNormalize" onchange="Normalize()">
+				<option value="Arabic" selected=selected>٠١٢٣٤٥٦٧٨٩</option>
+				<option value="Latin">0123456789</option>
+				<option value="NoChange">وەک خۆی بمێنێتەوە</option>
+			</select>
+		</div>
+	</div>
+	<div id="footer">
+		&copy; 2019 Aso Mahmudi <br />
+		<a href="http://www.kurdinus.com/" target="_blank">Kurdinus.com</a>
+		– <a href="https://www.facebook.com/kurdinus/" target="_blank">Facebook</a>
+		– <a href="https://www.github.com/aso-mehmudi/kurdinus/" target="_blank">GitHub</a>
+	</div>
+<script type="text/javascript">
+	function initialize(){
+		document.getElementById('btnCopyNormalize').className = 'hidden';
+		document.getElementById('btnClearNormalize').className = 'hidden';
+		document.getElementById('outputNormalize').className = 'hidden';
+		Normalize();
+	}
+	function Normalize() {
+		if (document.getElementById('inputNormalize').value != ''){
+			var s = document.getElementById('inputNormalize').value;
+			s = NormalizeKurdish(s);
+			s = NormalizePunctuations(s);
+			s = UnifyNumbers(s, 'Normalize');
+			document.getElementById('outputNormalize').className = "pre";
+			document.getElementById('outputNormalize').innerHTML = s;
+			document.getElementById('btnCopyNormalize').className = 'btn-danger';
+			document.getElementById('btnClearNormalize').className = 'btn-light';
+		} else {
+			clearAll();
+		};
+	};
+	function NormalizeKurdish(s){
+		var harf = '\u0620-\u064A\u066E-\u06D5\u06FA-\u06FF\u0750-\u077F'; //\u08A0-u08FF
+		var haraka = '\u064B-\u065F';
+		var Corrections = new Array(
+			'ي|ى|ے', 'ی',
+			'ك|ڪ', 'ک',
+			'(\u201C|\\(\\()', '«',
+			'(\u201D|\\)\\))', '»',
+			'([^ ])  ([^ ])', '$1 $2',
+			'\u200c{2,}', '\u200c',				//omit multiple ZWNJ
+			'\u06BE([^ـ' + harf + haraka + ']|$)', 'هـ$1',
+			'\u06BE', 'ه',
+			'\u0647\u200C', '\u06D5',			// 0647 + ZWNJ > E
+			'\u0647\u200D', 'هـ',				// 0647 + ZWJ > H
+			'([ءادرڕزژوۆە])\u200C', '$1',		// unnecessary ZWNJ
+			'\u0647([^ـ' + harf + haraka + '])', '\u06D5$1',		// isolated and final Heh > E
+			'\u200Cو ', ' و ',
+			'([' + harf + '])\u200C([^' + harf + '])', '$1$2',	//remove unnecessary ZWNJ
+			'ـ{2,}', 'ـ',			// duplicated Tatweel
+			'ـ' + '([ئبپتجچحخسشعغفڤقکگلڵمنهیێءادرڕزژۆە])', '$1',		// delete unnecessary Tatweel
+			'([بپتجچحخسشعغفڤقکگلڵمنیێ])' + 'ـ', '$1',		// delete unnecessary Tatweel
+			'(^|[^هئ])' + 'ـ', '$1-'		// Tatweel to dash
+		);
+		for (i = 0; i < Corrections.length; i += 2)
+			s = s.replace(new RegExp(Corrections[i], 'g'), Corrections[i + 1]);
+		return s;
+	};	
+	function NormalizePunctuations(s){
+		var harf = '\u0620-\u064A\u066E-\u06D5\u06FA-\u06FF\u0750-\u077F'; //\u08A0-u08FF
+		var Corrections = new Array(
+			'([،:؛؟!»)}\\]\\)])([' + harf + '])', '$1 $2',	// add space after ending punc
+			'([' + harf + ']) ([\\.،:؛؟!»)}\\]\\)])', '$1$2',	// remove space before ending punc
+			'\\.([' + harf + ']{2,})', '. $1',	// space after full stop
+			'([' + harf + '])([(«{\\[])', '$1 $2',	// add space before ending punc
+			'([(«{\\[]) ([' + harf + '])', '$1$2',	// remove space after ending punc
+			'(^|\\n)(\\d+)-([' + harf + '])', '$1$2- $3'	// add space between number and letter 
+		);
+		for (i = 0; i < Corrections.length; i += 2)
+			s = s.replace(new RegExp(Corrections[i], 'g'), Corrections[i + 1]);
+		return s;
+	};
+	function UnifyNumbers(s) {
+		var sNumbers = new Array(
+			'0', '۰', '٠',
+			'1', '۱', '١',
+			'2', '۲', '٢',
+			'3', '۳', '٣',
+			'4', '۴', '٤',
+			'5', '۵', '٥',
+			'6', '۶', '٦',
+			'7', '۷', '٧',
+			'8', '۸', '٨',
+			'9', '۹', '٩'
+		);
+		if (document.getElementById('NumTypeNormalize').value == 'Arabic') {
+			for (i = 0; i < sNumbers.length; i += 3)
+				s = s.replace(new RegExp(sNumbers[i] + '|' + sNumbers[i + 1], 'g'), sNumbers[i + 2]);
+		};
+		if (document.getElementById('NumTypeNormalize').value == 'Latin') {
+			for (i = 0; i < sNumbers.length; i += 3)
+				s = s.replace(new RegExp(sNumbers[i + 2] + '|' + sNumbers[i + 1], 'g'), sNumbers[i]);
+		};
+		return s;
+	};
+	function CopyOutput() {
+		var text = document.getElementById('outputNormalize');
+		if (document.body.createTextRange) { //ms
+			var range = document.body.createTextRange();
+			range.moveToElementText(text);
+			range.select();
+		} else if (window.getSelection) { //all others
+			var selection = window.getSelection();
+			range = document.createRange();
+			range.selectNodeContents(text);
+			selection.removeAllRanges();
+			selection.addRange(range);
+		}
+		document.execCommand("copy");
+	}
+	function clearAll() {
+		document.getElementById('inputNormalize').value = '';
+		document.getElementById('outputNormalize').innerHTML = '';
+		document.getElementById('outputNormalize').className = 'hidden';
+		document.getElementById('btnCopyNormalize').className = 'hidden';
+		document.getElementById('btnClearNormalize').className = 'hidden';
+	};
+</script>
+</body>
+</html>

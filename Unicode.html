@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ckb" dir="rtl" >
+<head>
+	<title>Kurdînûs 2019</title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content= "width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="kurdish,kurdish transliteration,kurdish alphabet converter,kurdish normalizer,kurdinus,کوردی نووس,کوردینوس,کوردینووس,پەڵک,یونیکۆد,یوونکۆد,گۆڕینی ئەلفوبێ,تایپی کوردی,تەختەکلیلی کوردی,کوردی" />
+	<meta name="description" content="بەرنامەیەک بۆ تایپ، گۆڕینی ئەلفوبێ و ستاندارد کردنی خاڵبەندی و یوونیکۆدی کورد" />
+	<link rel="stylesheet" href="kurdinus.css">
+</head>
+<body onload="initialize();" style="direction: rtl;">
+	<noscript>
+		<div class="error">
+			<h1>وێبگەڕەکەت ناهێڵێت سکریپتەکان کار بکەن</h1>
+			<p>ئەگەر Internet Explorer بە کار دێنیت، لەسەر Allow Blocked Content دا کلیک بکە.</p>
+			<a href="http://www.enable-javascript.com/" target="_blank">How to enable JavaScript in your browser</a>
+		</div>
+	</noscript>
+	<!--[if lt IE 8]>
+		<style type="text/css">
+			#main { width: 570px; }
+			.max #main { width: 98%; }
+		</style>
+	<![endif]-->
+	<div class="title">
+		<b><a href="http://kurdinus.com/" target="_self">Kurdînûs 2019</a></b>
+		<div style="font-size:16px;" class="navbar">
+			<div class="nav-item"><a href="Type.html">تایپ</a></div>
+			<div class="nav-item"><a href="Transliterate.html">گۆڕینی‌ئەلفوبێ</a></div>
+			<div class="nav-item"><a href="Normalize.html">خاوێنکردنەوە</a></div>
+			<div class="nav-item active">بەیوونیکۆدکردن</div>
+		</div>
+	</div>
+	<div id="TabUnicode" class="selectedTab">
+		<div class="navbar">
+			<div id="itemAliK" onclick="return ChangeFontType('AliK')">Ali-K</div>
+			<div id="itemAliWeb" onclick="return ChangeFontType('AliWeb')">Ali-Web</div>
+			<div id="itemKDylan" onclick="return ChangeFontType('KDylan')">K-Dylan</div>
+		</div>
+		<textarea id="inputUnicode" placeholder="دەقی فۆنتی نایوونیکۆد بخەرە ئێرە" spellcheck="false"
+		onblur="Font2Unicode()" onkeyup="Font2Unicode()" onmousedown="Font2Unicode()" onmouseup="Font2Unicode()"></textarea>
+		<div class="textout"><pre id="outputUnicode"></pre></div>
+		<div id="btnCopyUnicode" onclick="CopyOutput()">کۆپی</div>
+		<div id="btnClearUnicode" onclick="clearAll()">سڕینەوە</div>
+		<div class="option">
+			جۆری ژمارەکان:
+			<select id="NumTypeUnicode" onchange="Font2Unicode()">
+				<option value="Arabic" selected=selected>٠١٢٣٤٥٦٧٨٩</option>
+				<option value="Latin">0123456789</option>
+				<option value="NoChange">وەک خۆی بمێنێتەوە</option>
+			</select>
+		</div>
+	</div>
+	<div id="footer">
+		&copy; 2019 Aso Mahmudi <br />
+		<a href="http://www.kurdinus.com/" target="_blank">Kurdinus.com</a>
+		– <a href="https://www.facebook.com/kurdinus/" target="_blank">Facebook</a>
+		– <a href="https://www.github.com/aso-mehmudi/kurdinus/" target="_blank">GitHub</a>
+	</div>
+<script type="text/javascript">
+	function initialize(){
+		ChangeFontType('AliK');
+		document.getElementById('btnCopyUnicode').className = 'hidden';;
+		document.getElementById('btnClearUnicode').className = 'hidden';
+		document.getElementById('outputUnicode').innerHTML = '';
+		document.getElementById('outputUnicode').className = 'hidden';
+		Font2Unicode();
+	}
+	function ChangeFontType(type) {
+		if (type == 'AliK') {
+			document.getElementById('itemAliK').className = 'nav-item active';
+			document.getElementById('itemAliWeb').className = 'nav-item';
+			document.getElementById('itemKDylan').className = 'nav-item';
+			Font2Unicode();
+		}
+		if (type == 'AliWeb') {
+			document.getElementById('itemAliK').className = 'nav-item';
+			document.getElementById('itemAliWeb').className = 'nav-item active';
+			document.getElementById('itemKDylan').className = 'nav-item';
+			Font2Unicode();
+		}
+		if (type == 'KDylan') {
+			document.getElementById('itemAliK').className = 'nav-item';
+			document.getElementById('itemAliWeb').className = 'nav-item';
+			document.getElementById('itemKDylan').className = 'nav-item active';
+			Font2Unicode();
+		}
+	} 
+	function CopyOutput() {
+		var text = document.getElementById('outputUnicode');
+		if (document.body.createTextRange) { //ms
+			var range = document.body.createTextRange();
+			range.moveToElementText(text);
+			range.select();
+		} else if (window.getSelection) { //all others
+			var selection = window.getSelection();
+			range = document.createRange();
+			range.selectNodeContents(text);
+			selection.removeAllRanges();
+			selection.addRange(range);
+		}
+		document.execCommand("copy");
+	}
+	function Font2Unicode() {
+		if (document.getElementById('inputUnicode').value != ''){
+			var sAliK = new Array(
+				'لاَ|لآ|لاً', 'ڵا',
+				'لً|لَ|لأ', 'ڵ',
+				'ة', 'ە',
+				'ه', 'ھ',
+				'للھ', 'لله',
+				'ض', 'چ',
+				'ث', 'پ',
+				'ظ', 'ڤ',
+				'ط', 'گ',
+				'ىَ|يَ|یَ|آ', 'ێ',
+				'رِ', 'ڕ',
+				'ؤ|وَ', 'ۆ',
+				'ي|ى', 'ی',
+				'ء', '\u200Cو',
+				'ِ', '',
+				'ك', 'ک',
+				'ذ', 'ژ'
+				);
+			var sAliWeb = new Array(
+				'لاَ|لآ|لاً', 'ڵا',
+				'لَ|پ', 'ڵ',
+				'ة', 'ە',
+				'ه', 'ھ',
+				'رِ|أ', 'ڕ',
+				'ؤ|وَ', 'ۆ',
+				'يَ|یَ', 'ێ',
+				'ص', 'ێ',
+				'ي', 'ی',
+				'ط', 'ڭ', //swap ط and گ
+				'گ', 'ط', //
+				'ڭ', 'گ', //
+				'ض', 'چ',
+				'ث', 'پ',
+				'ظ', 'ڤ',
+				'ْ|ُ', '',
+				'ى', '*',
+				'ك', 'ک',
+				'ذ', 'ژ'
+			);
+			var sDylan = new Array(
+				'لإ|لأ|لآ', 'ڵا',
+				'ؤ|وَ', 'ۆ',
+				'ة', 'ە',
+				'ض', 'ڤ',
+				'ص', 'ڵ',
+				'ث', 'ێ',
+				'ؤ', 'ۆ',
+				'ي|ى', 'ی',
+				'ك', 'ک',
+				'ذ', 'ڕ'
+			);
+			var s = document.getElementById('inputUnicode').value;
+			if(document.getElementById('itemAliK').className == "nav-item active"){
+				for (var i = 0; i < sAliK.length; i += 2)
+					s = s.replace(new RegExp(sAliK[i], 'g'), sAliK[i + 1]);
+			}
+			if(document.getElementById('itemAliWeb').className == "nav-item active"){
+				for (var i = 0; i < sAliWeb.length; i += 2)
+					s = s.replace(new RegExp(sAliWeb[i], 'g'), sAliWeb[i + 1]);
+			}
+			if(document.getElementById('itemKDylan').className == "nav-item active"){
+				for (var i = 0; i < sDylan.length; i += 2)
+					s = s.replace(new RegExp(sDylan[i], 'g'), sDylan[i + 1]);
+			}
+			s = UnifyNumbers(s);
+			document.getElementById('outputUnicode').className = "pre";
+			document.getElementById('outputUnicode').innerHTML = s;
+			document.getElementById('btnCopyUnicode').className = 'btn-danger';
+			document.getElementById('btnClearUnicode').className ='btn-light';
+		} else {
+			clearAll('Unicode');
+		};
+	};
+	function UnifyNumbers(s) {
+		var sNumbers = new Array(
+			'0', '۰', '٠',
+			'1', '۱', '١',
+			'2', '۲', '٢',
+			'3', '۳', '٣',
+			'4', '۴', '٤',
+			'5', '۵', '٥',
+			'6', '۶', '٦',
+			'7', '۷', '٧',
+			'8', '۸', '٨',
+			'9', '۹', '٩'
+		);
+		if (document.getElementById('NumTypeUnicode').value == 'Arabic') {
+			for (i = 0; i < sNumbers.length; i += 3)
+				s = s.replace(new RegExp(sNumbers[i] + '|' + sNumbers[i + 1], 'g'), sNumbers[i + 2]);
+		};
+		if (document.getElementById('NumTypeUnicode').value == 'Latin') {
+			for (i = 0; i < sNumbers.length; i += 3)
+				s = s.replace(new RegExp(sNumbers[i + 2] + '|' + sNumbers[i + 1], 'g'), sNumbers[i]);
+		};
+		return s;
+	};
+	function clearAll() {
+		document.getElementById('inputUnicode').value = '';
+		document.getElementById('outputUnicode').innerHTML = '';
+		document.getElementById('outputUnicode').className = 'hidden';
+		document.getElementById('btnCopyUnicode').className = 'hidden';
+		document.getElementById('btnClearUnicode').className = 'hidden';
+	};
+</script>
+</body>
+</html>

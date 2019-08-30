@@ -1,0 +1,376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ckb" dir="rtl" >
+<head>
+	<title>Kurdînûs 2019</title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content= "width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="kurdish,kurdish transliteration,kurdish alphabet converter,kurdish normalizer,kurdinus,کوردی نووس,کوردینوس,کوردینووس,پەڵک,یونیکۆد,یوونکۆد,گۆڕینی ئەلفوبێ,تایپی کوردی,تەختەکلیلی کوردی,کوردی" />
+	<meta name="description" content="بەرنامەیەک بۆ تایپ، گۆڕینی ئەلفوبێ و ستاندارد کردنی خاڵبەندی و یوونیکۆدی کورد" />
+	<link rel="stylesheet" href="kurdinus.css">
+</head>
+<body onload="initialize();" style="direction: rtl;">
+	<noscript>
+		<div class="error">
+			<h1>وێبگەڕەکەت ناهێڵێت سکریپتەکان کار بکەن</h1>
+			<p>ئەگەر Internet Explorer بە کار دێنیت، لەسەر Allow Blocked Content دا کلیک بکە.</p>
+			<a href="http://www.enable-javascript.com/" target="_blank">How to enable JavaScript in your browser</a>
+		</div>
+	</noscript>
+	<!--[if lt IE 8]>
+		<style type="text/css">
+			#main { width: 570px; }
+			.max #main { width: 98%; }
+		</style>
+	<![endif]-->
+	<div class="title">
+		<b><a href="http://kurdinus.com/" target="_self">Kurdînûs 2019</a></b>
+		<div style="font-size:16px;" class="navbar">
+			<div class="nav-item active">تایپ</div>
+			<div class="nav-item"><a href="Transliterate.html">گۆڕینی‌ئەلفوبێ</a></div>
+			<div class="nav-item"><a href="Normalize.html">خاوێنکردنەوە</a></div>
+			<div class="nav-item"><a href="Unicode.html">بەیوونیکۆدکردن</a></div>
+		</div>
+	</div>
+	<div id="TabType" class="selectedTab">
+		<textarea id="outputType" style="display:inline-block;" placeholder="بە کلیلەکانی خوارەوە تایپ بکە"></textarea>
+		<div class="navbar">
+			<div id="itemKeyboard" onclick="return changeKeyType('Keyboard')">تەختەکلیل</div>
+			<div id="itemCharMap" onclick="return changeKeyType('CharMap')">نووسەی تایبەت</div>
+		</div>
+		<div id="Keyboards" style="direction:ltr;">
+			<div id="KeyboardMobile" class="Keyboard">
+				<div id="row1Mobile"></div>
+				<div id="row2Mobile"></div>
+				<div id="row3Mobile"></div>
+				<div>
+					<span id="row4Mobile"></span>
+				</div>
+				<div>
+					<span id="row5Mobile"></span>
+					<span class="key" style="width:80px" onclick="insertChar(' ')">&nbsp;</span>
+					<span class="keyFunc" style="width: 43px; vertical-align: bottom;" onclick="Backspace()">
+						<svg style="width:24px;height:24px" viewBox="0 0 34 34">
+							<path fill="#000000" d="M19,15.59L17.59,17L14,13.41L10.41,17L9,15.59L12.59,12L9,8.41L10.41,7L14,10.59L17.59,7L19,8.41L15.41,12L19,15.59M22,3A2,2 0 0,1 24,5V19A2,2 0 0,1 22,21H7C6.31,21 5.77,20.64 5.41,20.11L0,12L5.41,3.88C5.77,3.35 6.31,3 7,3H22M22,5H7L2.28,12L7,19H22V5Z" />
+						</svg>
+					</span>
+					<span class="keyFunc" style="width: 47px; vertical-align: bottom;" onclick="insertChar('\n')">
+						<svg style="width:24px;height:24px" viewBox="0 0 34 34">
+							<path fill="#000000" d="M19,7V11H5.83L9.41,7.41L8,6L2,12L8,18L9.41,16.58L5.83,13H21V7H19Z" />
+						</svg>
+					</span>
+				</div>
+			</div>
+			<div id="Keyboard" class="Keyboard">
+				<div>
+					<span id="row1"></span> <!--13 keys-->
+					<span class="keyFunc" style="width: 43px;" onclick="Backspace()">Back</span>
+				</div>
+				<div>
+					<span class="keyFunc" style="width: 42px;" onclick="insertChar('\t')">Tab</span>
+					<span id="row2"></span> <!--13 keys-->
+				</div>
+				<div>
+					<span class="keyFunc" style="width: 47px">Caps</span>
+					<span id="row3"></span> <!--11 keys-->
+					<span class="keyFunc" style="width: 47px;" onclick="insertChar('\n')">Enter</span>
+				</div>
+				<div>
+					<span class="keyFunc" style="width: 60px;" onclick="shift(true)">Shift</span>
+					<span id="row4"></span> <!--10 keys-->
+					<span class="keyFunc" style="width: 60px;" onclick="shift(true)">Shift</span>
+				</div>
+				<div style="font-size:90%;">
+					<span class="key" onclick="insertChar('\u00A0')" title="Non-Breaking Space">NBS</span>
+					<span class="key" onclick="insertChar('\u2011')" title="Non-Breaking Hyphen">NBH</span>
+					<span class="key" onclick="insertChar('ـ')" title="تطویل">ـ</span>
+					<span class="key" style=" width:150px" onclick="insertChar(' ')">&nbsp;</span>
+					<span class="key" onclick="insertChar('\u200C')" title="Zero-Width Non-Joiner">جیاکەر</span>
+					<span class="key" onclick="insertChar('\u200D')" title="Zero-Width Joiner">لکێنەر</span>
+				</div>
+			</div>
+			<div id="KeyboardShifted" class="Keyboard">
+				<div class="row">
+					<span id="row1shift"></span>
+					<span class="keyFunc" style="width: 43px;" onclick="Backspace()">Back</span>
+				</div>
+				<div class="row">
+					<span class="keyFunc" style="width: 42px;" onclick="insertChar('\t')">Tab</span>
+					<span id="row2shift"></span>
+				</div>
+				<div class="row">
+					<span class="keyFunc" style="width: 47px">Caps</span>
+					<span id="row3shift"></span>
+					<span class="keyFunc" style="width: 47px">Enter</span>
+				</div>
+				<div class="row">
+					<span class="keyFunc" style="width: 60px; background-color: #f4b360;" onclick="shift(false)">Shift</span>
+					<span id="row4shift"></span>
+					<span class="keyFunc" style="width: 60px; background-color: #f4b360;" onclick="shift(false)">Shift</span>
+				</div>
+				<div style="font-size:90%;">
+					<span class="key" onclick="insertChar('\u00A0')" title="Non-Breaking Space">NBS</span>
+					<span class="key" onclick="insertChar('\u2011')" title="Non-Breaking Hyphen">NBH</span>
+					<span class="key" onclick="insertChar('ـ')" title="تطویل">ـ</span>
+					<span class="key" style=" width:150px" onclick="insertChar(' ')">&nbsp;</span>
+					<span class="key" onclick="insertChar('\u200C')" title="Zero-Width Non-Joiner">جیاکەر</span>
+					<span class="key" onclick="insertChar('\u200D')" title="Zero-Width Joiner">لکێنەر</span>
+				</div>
+			</div>
+			<div class="option" id="KeyboardLayoutType">
+				جۆری داچنینی کلیلەکان:
+				<select id="LayoutType" onchange="MakeKeyboard()">
+					<option value="Arabic">کوردی (شێوازی عەرەبی)</option>
+					<option value="Persian" selected=selected>کوردی (شێوازی فارسی)</option>
+					<option value="Latin">کوردی (شێوازی لاتینی)</option>
+					<option value="Hawar">Kurdî</option>
+				</select>
+			</div>
+		</div>
+		<div id="CharMaps">
+			<div id="CharacterMap" class="navbar" style="font-size:12px;">
+				<div id="itemCharGroupKurdish" onclick="return CharMap('Kurdish')"> کوردی</div>
+				<div id="itemCharGroupPunctuation" onclick="return CharMap('Punctuation')">خاڵبەندی</div>
+				<div id="itemCharGroupMath" onclick="return CharMap('Math')">بیرکاری</div>
+				<div id="itemCharGroupArabic" onclick="return CharMap('Arabic')">عەرەبی/فارسی</div>
+				<div id="itemCharGroupHaraka" onclick="return CharMap('Haraka')">حەرەکە</div>
+				<div id="itemCharGroupLatin" onclick="return CharMap('Latin')">لاتین</div>
+			</div>
+			<div id="keyGroup" class="keyGroup"></div>
+		</div>
+		<div id="btnCopyType" onclick="CopyOutput()" class="btn-danger option">
+			<svg style="width:24px;height:24px; vertical-align: middle;" viewBox="0 0 35 35">
+				<path fill="#fff" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+			</svg>
+			کۆپی</div>
+		<div class="option">
+			ئاڕاستەی دەق:
+			<select id="DirectionType" onchange="TypingDirection()">
+				<option value="rtl" selected=selected>ڕاست بۆ چەپ</option>
+				<option value="ltr">چەپ بۆ ڕاست</option>
+			</select>
+		</div>
+	</div>
+	<div id="footer">
+		&copy; 2019 Aso Mahmudi <br />
+		<a href="http://www.kurdinus.com/" target="_blank">Kurdinus.com</a>
+		– <a href="https://www.facebook.com/kurdinus/" target="_blank">Facebook</a>
+		– <a href="https://www.github.com/aso-mehmudi/kurdinus/" target="_blank">GitHub</a>
+	</div>
+<script type="text/javascript">
+	function initialize(){
+		changeKeyType('Keyboard');
+		MakeMobileKeyboard();
+		CharMap('Kurdish');
+		shift(false);
+		MakeKeyboard();
+	}
+	function changeKeyType(type){
+		if (type == 'Keyboard') {
+			document.getElementById('itemKeyboard').className = 'nav-item active';
+			document.getElementById('itemCharMap').className = 'nav-item';
+			document.getElementById('CharMaps').className = 'hidden';
+			document.getElementById('Keyboards').className = 'visible';
+		};
+		if (type == 'CharMap') {
+			document.getElementById('itemKeyboard').className = 'nav-item';
+			document.getElementById('itemCharMap').className = 'nav-item active';
+			document.getElementById('Keyboards').className = 'hidden';
+			document.getElementById('CharMaps').className = 'visible';
+		};
+	};
+	function insertChar(char) {
+		var txtarea = document.getElementById('outputType');
+		var ch = char;
+		if (document.selection) { //IE
+			var sel = document.selection.createRange();
+			sel.text = ch;
+		} else if (txtarea.selectionStart || txtarea.selectionStart == '0') { //Firefox
+			var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			txtarea.value = txtarea.value.substring(0, startPos)
+				+ ch
+				+ txtarea.value.substring(endPos, txtarea.value.length);
+			txtarea.selectionStart = startPos + ch.length;
+			txtarea.selectionEnd = startPos + ch.length;
+		} else {
+			txtarea.value += ch;
+		}
+		txtarea.focus();
+		txtarea.blur();
+	};
+	function Backspace() {
+		var txtarea = document.getElementById('outputType');
+		if (document.selection) { //IE
+			var sel = document.selection.createRange();
+		} else if (txtarea.selectionStart || txtarea.selectionStart == '0') { //Firefox
+			var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			txtarea.value = txtarea.value.substring(0, startPos - 1) + txtarea.value.substring(endPos, txtarea.value.length);
+			txtarea.selectionStart = startPos - 1;
+			txtarea.selectionEnd = startPos - 1;
+		} else {
+			txtarea.value += char;
+		}
+		txtarea.focus();
+		txtarea.blur();
+	};
+	function CharMap(group) {
+		document.getElementById('keyGroup').innerHTML = '';
+		document.getElementById('itemCharGroupKurdish').className = 'nav-item';
+		document.getElementById('itemCharGroupPunctuation').className = 'nav-item';
+		document.getElementById('itemCharGroupMath').className = 'nav-item';
+		document.getElementById('itemCharGroupArabic').className = 'nav-item';
+		document.getElementById('itemCharGroupHaraka').className = 'nav-item';
+		document.getElementById('itemCharGroupLatin').className = 'nav-item';
+		var Kurdish = new Array('ڕ', 'ڤ', 'ڵ', 'ێ', 'ۆ', 'ە', 'ڎ', 'ۮ', 'ڒ', 'ۉ', 'ۊ', 'ۋ', 'ݩ', 'ç', 'ê', 'î', 'û', 'ş', 'ḧ', 'ẍ');
+		var Punctuation = new Array('(', ')', '[', ']', '«', '»', '‹', '›', '{', '}', '﴿', '﴾', '.', '،', '؟', '!', ':', '؛', '/', '٭', '*', '‘', '’', '‚', '“', '”', '„', '–', '—');
+		var Math = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩', '٪', '+', '-', '×', '÷', '=', '٫', '٬', '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
+		var Arabic = new Array( 'ا', 'آ', 'أ', 'إ', 'ٱ', 'ب', 'ت', 'پ', 'ث', 'ج', 'چ', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'ژ', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 'ک', 'گ', 'ڭ', 'ل', 'م', 'ن', 'ھ', 'ه', 'ة', 'ۀ', 'و', 'ؤ', 'ى', 'ي', 'ی', 'ئ', 'ء', 'ىٰ');
+		var Haraka = new Array('َ', 'ُ', 'ِ', 'ً', 'ٌ', 'ٍ', 'ّ', 'ْ', 'ٔ', 'ٕ', 'ٓ', 'ٰ', 'ٙ');
+		var Latin = new Array('à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ð', 'ñ', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ß', 'þ', 'ÿ', 'ğ', 'İ', 'ı', 'œ', 'ş', 'ə', 'ḧ', 'ẍ');
+		var groupName = eval(group);
+		document.getElementById('itemCharGroup' + group).className = 'nav-item active';
+		for (i = 0; i < groupName.length; i++) {
+			var key = document.createElement("sapn");
+			key.setAttribute('class', 'key');
+			key.innerHTML = groupName[i];
+			key.setAttribute('onclick', 'insertChar(\'' + groupName[i] + '\')');
+			document.getElementById('keyGroup').appendChild(key);
+		};
+	};
+	function MakeMobileKeyboard(){
+		var LayoutMobile = new Array(
+			'٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩', 'ـ',
+			'ڤ', 'ئ', 'ێ', 'ق', 'ف', 'غ', 'ع', 'ە', 'خ', 'ح', 'ج',
+			'ش', 'س', 'ی', 'ب', 'ل', 'ا', 'ت', 'ن', 'م', 'ک', 'گ',
+			'ژ', 'ه', 'ۆ', 'ز', 'ڵ', 'ر', 'ڕ', 'د', 'پ', 'و', 'چ',
+			'.', ':', '،', '؛',
+			);
+		for (i = 0; i < LayoutMobile.length; i++) {
+			var ch = LayoutMobile[i];
+			var key = document.createElement("span");
+			key.setAttribute('class', 'key');
+			key.setAttribute('onclick', 'insertChar(\'' + ch + '\')');
+			key.innerHTML = (ch == 'ه')? 'ھ' : ch;
+			if (i < 11) {
+				document.getElementById('row1Mobile').appendChild(key);
+			} else if (i > 10 && i < 22) {
+				document.getElementById('row2Mobile').appendChild(key);
+			} else if (i > 21 && i < 33) {
+				document.getElementById('row3Mobile').appendChild(key);
+			} else if (i > 32 && i < 44) {
+				document.getElementById('row4Mobile').appendChild(key);
+			} else{
+				document.getElementById('row5Mobile').appendChild(key);
+			};
+		};
+		document.getElementById('outputType').focus();
+		document.getElementById('outputType').blur();
+	};
+	function MakeKeyboard() {
+		for (i = 1; i < 5; i++) {
+			document.getElementById('row' + i).innerHTML = '';
+			document.getElementById('row' + i + 'shift').innerHTML = '';
+		};
+		var LayoutArabic = new Array( // from http://chawg.org/wiki/Chawg_Keyboard_Layouts
+			'ژ', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩', '٠', '-', '=',
+			'چ', 'ص', 'پ', 'ق', 'ف', 'غ', 'ع', 'ه', 'خ', 'ح', 'ج', 'د', '\\',
+			'ش', 'س', 'ی', 'ب', 'ل', 'ا', 'ت', 'ن', 'م', 'ک', 'گ',
+			'ئ', 'ء', 'ۆ', 'ر', 'لا', 'ى', 'ە', 'و', 'ز', '/',
+			'ذ', '!', '@', '#', '$', '%', '^', '&', '*', ')', '(', '_', '+',
+			'ض', '}', 'ث', '{', 'ڤ', 'إ', '', '\'', '"', '؛', '>', '<', '',
+			']', '[', 'ێ', '', 'ڵ', 'أ', 'ـ', '،', '/', ':', 'ط',
+			'', '', 'ؤ', 'ڕ', 'ڵا', 'آ', 'ة', ',', '.', '؟'
+			);
+		var LayoutPersian = new Array(
+			'پ', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩', '٠', '-', '=',
+			'ڵ', 'ۆ', 'ێ', 'ق', 'ف', 'غ', 'ع', 'ە', 'خ', 'ح', 'ج', 'چ', 'ژ',
+			'ش', 'س', 'ی', 'ب', 'ل', 'ا', 'ت', 'ن', 'م', 'ک', 'گ',
+			'ڤ', 'ه', 'ز', 'ر', 'ڕ', 'د', 'ئ', 'و', '.', '/',
+			'', '!', '@', '}', '{', '٪', '÷', '×', '*', ')', '(', '-', '=',
+			'ض', 'ص', 'ث', '', '', '', '', '', '', '', '', '', '',
+			'', '', 'ي', 'إ', 'أ', '', '', '', '', '', '',
+			'ظ', 'ط', '', '', 'ذ', '', 'ء', 'ؤ', '،', '؟'
+			);
+		var LayoutLatin = new Array(
+			'`', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩', '٠', '-', '=',
+			'ق', 'و', 'ە', 'ر', 'ت', 'ی', 'ئ', 'ح', 'ۆ', 'پ', '}', '{', '\\',
+			'ا', 'س', 'د', 'ف', 'گ', 'ه', 'ژ', 'ک', 'ل', '؛', '',
+			'ز', 'خ', 'ج', 'ڤ', 'ب', 'ن', 'م', '،', '.', '/',
+			'~', '!', '@', '#', '$', '%', '^', '&', '*', ')', '(', '_', '+',
+			'', '', 'ي', 'ڕ', 'ط', 'ێ', 'ء', 'ع', 'ؤ', 'ث', ']', '[', '',
+			'آ', 'ش', 'ذ', 'إ', 'غ', '', 'أ', 'ك', 'ڵ', ':', '',
+			'ض', 'ص', 'چ', 'ظ', 'ى', 'ة', 'ـ', '>', '<', '؟'
+			);
+		var LayoutHawar = new Array( 
+			'`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=',
+			'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'û', 'ş', 'ç',
+			'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ê', 'î',
+			'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/',
+			'~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+',
+			'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Û', 'Ş', 'Ç',
+			'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ê', 'Î',
+			'Z', 'X', 'C', 'V', 'B', 'N', 'M', ';', ':', '?'
+			);
+		var LayoutType = 'Layout' + document.getElementById('LayoutType').value;
+		for (i = 0; i < LayoutArabic.length; i++) {
+			var ch = eval(LayoutType)[i];
+			var key = document.createElement("span");
+			key.setAttribute('class', 'key');
+			if (ch != '') {
+				key.setAttribute('onclick', 'insertChar(\'' + ch + '\')');
+				key.innerHTML = (ch == 'ه')? 'ھ' : ch;
+			} else {
+				key.innerHTML = '&nbsp;';
+				key.style = "cursor: default;";
+			};
+			if (i < 13) {
+				document.getElementById('row1').appendChild(key);
+			} else if (i > 12 && i < 26) {
+				document.getElementById('row2').appendChild(key);
+			} else if (i > 25 && i < 37) {
+				document.getElementById('row3').appendChild(key);
+			} else if (i > 36 && i < 47) {
+				document.getElementById('row4').appendChild(key);
+			} else if (i > 46 && i < 60) {
+				document.getElementById('row1shift').appendChild(key);
+			} else if (i > 59 && i < 73) {
+				document.getElementById('row2shift').appendChild(key);
+			} else if (i > 72 && i < 84) {
+				document.getElementById('row3shift').appendChild(key);
+			} else {
+				document.getElementById('row4shift').appendChild(key);
+			};
+		};
+		document.getElementById('outputType').focus();
+		document.getElementById('outputType').blur();
+	};
+	function TypingDirection() {
+		var dir = document.getElementById('DirectionType').value;
+		if (dir == 'rtl') {
+			document.getElementById('outputType').style = 'direction:rtl;';
+		} else {
+			document.getElementById('outputType').style = 'direction:ltr;';
+		};
+		MakeKeyboard();
+		document.getElementById('outputType').focus();
+		document.getElementById('outputType').blur();
+	};
+	function CopyOutput(tab) {
+		document.getElementById('outputType').select();			
+		document.execCommand("copy");
+	}
+	function shift(state) {
+		if (state == true) {
+			document.getElementById('Keyboard').className = 'hidden';
+			document.getElementById('KeyboardShifted').className = "visible";
+		} else {
+			document.getElementById('Keyboard').className = "visible";
+			document.getElementById('KeyboardShifted').className = 'hidden';
+		};
+		document.getElementById('outputType').focus();
+		document.getElementById('outputType').blur();
+	};
+</script>
+</body>
+</html>

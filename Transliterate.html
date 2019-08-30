@@ -1,0 +1,426 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ckb" dir="rtl" >
+<head>
+	<title>Kurdînûs 2019</title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content= "width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="kurdish,kurdish transliteration,kurdish alphabet converter,kurdish normalizer,kurdinus,کوردی نووس,کوردینوس,کوردینووس,پەڵک,یونیکۆد,یوونکۆد,گۆڕینی ئەلفوبێ,تایپی کوردی,تەختەکلیلی کوردی,کوردی" />
+	<meta name="description" content="بەرنامەیەک بۆ تایپ، گۆڕینی ئەلفوبێ و ستاندارد کردنی خاڵبەندی و یوونیکۆدی کورد" />
+	<link rel="stylesheet" href="kurdinus.css">
+</head>
+<body onload="initialize();" style="direction: rtl;">
+	<noscript>
+		<div class="error">
+			<h1>وێبگەڕەکەت ناهێڵێت سکریپتەکان کار بکەن</h1>
+			<p>ئەگەر Internet Explorer بە کار دێنیت، لەسەر Allow Blocked Content دا کلیک بکە.</p>
+			<a href="http://www.enable-javascript.com/" target="_blank">How to enable JavaScript in your browser</a>
+		</div>
+	</noscript>
+	<!--[if lt IE 8]>
+		<style type="text/css">
+			#main { width: 570px; }
+			.max #main { width: 98%; }
+		</style>
+	<![endif]-->
+	<div class="title">
+		<b><a href="http://kurdinus.com/" target="_self">Kurdînûs 2019</a></b>
+		<div style="font-size:16px;" class="navbar">
+			<div class="nav-item"><a href="Type.html">تایپ</a></div>
+			<div class="nav-item active">گۆڕینی‌ئەلفوبێ</div>
+			<div class="nav-item"><a href="Normalize.html">خاوێنکردنەوە</a></div>
+			<div class="nav-item"><a href="Unicode.html">بەیوونیکۆدکردن</a></div>
+		</div>
+	</div>
+	<div id="TabTransliteration" class="selectedTab">
+		<div class="navbar">
+			<div id="itemL2A" onclick="return ChangeTransliterationType('L2A')">Kurdî&nbsp;>&nbsp;کوردی</div>
+			<div id="itemA2L" onclick="return ChangeTransliterationType('A2L')">کوردی&nbsp;>&nbsp;kurdî</div>
+		</div>
+		<textarea id="inputTransliteration" spellcheck="false" 
+		onblur="Transliterate()" onkeyup="Transliterate()" onmousedown="Transliterate()" onmouseup="Transliterate()"></textarea>
+		<div class="textout" style="cursor:help;" title="ئاگاداری: لەوانەیە ئەم ئاکامە هەڵەی تێدا ببێت! تکایە پێیدا بچۆرەوە."><pre id="outputTransliteration"></pre></div>
+		<div id="btnCopyTransliteration" onclick="CopyOutput()">کۆپی</div>
+		<div id="btnClearTransliteration" onclick="clearAll()">سڕینەوە</div>
+		<div>
+			<div id="OptionsL2A">
+				<div class="option" style="cursor:help;" title="بۆ نموونە: sh بکرێت بە ش یان سهـ">
+					«ch gh hh sh ll rr» بکرێن بە:
+					<select id="DigraphType" onchange="Transliterate()">
+						<option value="diacritical" selected=selected>یەک پیت (چ غ ح ش ڵ ڕ)</option>
+						<option value="digraph">دوو پیت (جه‍ گه‍ هه‍ سه‍ لل رر)</option>
+					</select>
+				</div>
+				<div class="option">
+					جۆری ژمارەکان:
+					<select id="NumTypeTransliteration" onchange="Transliterate()">
+						<option value="Arabic" selected=selected>٠١٢٣٤٥٦٧٨٩</option>
+						<option value="Latin">0123456789</option>
+						<option value="NoChange">وەک خۆی بمێنێتەوە</option>
+					</select>
+				</div>
+			</div>
+			<div id="OptionsA2L" class="option">
+				<div class="option" style="cursor:help;" title="ئەو پیتانەی لە کورمانجیدا نانووسرێن">
+					«ڕ ڵ ح غ» بکرێن بە:
+					<select id="CentralPhonemeType" onchange="Transliterate()">
+						<option value="diacritical" selected=selected>یەک پیتی نیشانەدار (ř ɫ ḧ ẍ)</option>
+						<option value="digraph">دوو پیت (rr ll hh gh)</option>
+						<option value="reduced">یەک پیتی سادە (r l h x)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		&copy; 2019 Aso Mahmudi <br />
+		<a href="http://www.kurdinus.com/" target="_blank">Kurdinus.com</a>
+		– <a href="https://www.facebook.com/kurdinus/" target="_blank">Facebook</a>
+		– <a href="https://www.github.com/aso-mehmudi/kurdinus/" target="_blank">GitHub</a>
+	</div>
+<script type="text/javascript">
+	function initialize(){
+		ChangeTransliterationType('L2A');
+		document.getElementById('btnCopyTransliteration').className = 'hidden';
+		document.getElementById('btnClearTransliteration').className = 'hidden';
+		document.getElementById('outputTransliteration').className = 'hidden';
+		Transliterate();
+	}
+	function ChangeTransliterationType(type) {
+		if (type == "L2A") {
+			document.getElementById('itemA2L').className = 'nav-item';
+			document.getElementById('itemL2A').className = 'nav-item active';
+			document.getElementById('inputTransliteration').placeholder = "Deqî Kurdî bixere êre.";
+			document.getElementById('inputTransliteration').style = 'direction:ltr; text-align: left;';
+			document.getElementById('outputTransliteration').style = 'direction:rtl; text-align: right;';
+			document.getElementById('outputTransliteration').innerHTML = '';
+			document.getElementById('outputTransliteration').className = 'hidden';
+			document.getElementById('OptionsL2A').className = 'visible';
+			document.getElementById('OptionsA2L').className = 'hidden';
+			Transliterate();
+		}
+		if (type == "A2L") {
+			document.getElementById('itemL2A').className = 'nav-item';
+			document.getElementById('itemA2L').className = 'nav-item active';
+			document.getElementById('inputTransliteration').placeholder = "دەقی کوردی بخەرە ئێرە.";
+			document.getElementById('inputTransliteration').style = 'direction:rtl; text-align: right;';
+			document.getElementById('outputTransliteration').style = 'direction:ltr; text-align: left;';
+			document.getElementById('outputTransliteration').innerHTML = '';
+			document.getElementById('outputTransliteration').className = 'hidden';
+			document.getElementById('OptionsA2L').className = 'visible';
+			document.getElementById('OptionsL2A').className = 'hidden';
+			Transliterate();
+		};
+	};
+	function Transliterate() {
+		if (document.getElementById('inputTransliteration').value != ''){
+			var s = document.getElementById('inputTransliteration').value;
+			//Latin to Arabic
+			if (document.getElementById('itemL2A').className == 'nav-item active') {
+				s = s.toLowerCase();
+				var temp = '〿';
+				var ltr = 'a-zêîûçşéúıŕřĺɫƚḧẍʔ' + temp; // 〿 is a temp character
+				// unlike Arabic alphabet, in Latin alphabet of Northern Kurdish, Izafe and Substantive suffixes 
+				// and also plural suffix 'yên' is written seperated.
+				var krmSuffix = 'a|ê|yê|êt|yêt|î|yî|' + 'im|e|ye|în|ne|in|'+ 'yên';
+				var sSuffixes = ' (' + krmSuffix + ')($|[^' + ltr + '])'; // e.g. zana ye 
+				s = s.replace(new RegExp(sSuffixes, 'gim'), '$1$2');
+				sSuffixes = '([^' + ltr + '])(' + krmSuffix + ')($|[^' + ltr + '])' //e.g. (nav)ê "nav"ê
+				s = s.replace(new RegExp(sSuffixes, 'gim'), '$1' + temp + '$2$3');
+				// if digraphs 
+				if (document.getElementById('DigraphType').value == 'diacritical'){
+					var sDigraphs = new Array(
+						'ch', 'ç',
+						'gh', 'ẍ',
+						'hh', 'ḧ',
+						'sh', 'ş',
+						'll', 'ɫ',
+						'rr', 'ř'
+						);
+					for (var i = 0; i < sDigraphs.length; i += 2)
+						s = s.replace(new RegExp(sDigraphs[i], 'gim'), sDigraphs[i + 1]);
+				};
+				//main conversion
+				var sConvertLatin2Arabic = new Array(
+					'\u201C', '«',
+					'\u201D', '»',
+					'([0-9])([\'’-])([aeiouêîûéú' + temp +'])', '$1$3',		// (e.g. 1990'an 5'ê)
+					'ʔ', '',
+					'(^|[^' + ltr + '0-9\'’])([aeiouêîûéú])', '$1ئ$2',	//insert hamza
+					'([aeouêîûéú])([aeiouêîûéú])', '$1ئ$2',		//insert hamza between adjacent vowels
+					'(ئ)([uû])([^' + ltr + '0-9])', 'و$3',		//omit the inserted hamza for 'u' (=and)
+					'a', 'ا',
+					'b', 'ب',
+					'ç', 'چ',
+					'c', 'ج',
+					'd', 'د',
+					'ê|é', 'ێ',
+					'e', 'ە',
+					'f', 'ف',
+					'g', 'گ',
+					'h', 'ه',
+					'ḧ', 'ح',
+					'i|ı', '',
+					'î|y|í', 'ی',
+					'j', 'ژ',
+					'k', 'ک',
+					'l', 'ل',
+					'Ɨ|ĺ|ł|ƚ|ɫ', 'ڵ',
+					'm', 'م',
+					'n', 'ن',
+					'o', 'ۆ',
+					'ö', 'ۊ',
+					'p', 'پ',
+					'q', 'ق',
+					'r', 'ر',
+					'ř|ŕ', 'ڕ',
+					's', 'س',
+					'ş', 'ش',
+					't', 'ت',
+					'û|ú', 'وو',
+					'u|w', 'و',
+					'ü', 'ۊ',
+					'v', 'ڤ',
+					'x', 'خ',
+					'ẍ', 'غ',
+					'z', 'ز',
+					'ه' + '($|[^ابپتجچحخدرڕزژسشصعغفڤقکگلڵمنوۆهەیێ])', 'هـ' + '$1',
+					'\'|’', '<span style="color:red">ع</span>', // need checking
+					'\\u003F', '؟', //question mark
+					'\,', '،',
+					'\;', '؛'
+				);
+				for (var i = 0; i < sConvertLatin2Arabic.length; i += 2)
+					s = s.replace(new RegExp(sConvertLatin2Arabic[i], 'gim'), sConvertLatin2Arabic[i + 1]);
+				//remove temp character
+				s = s.replace(new RegExp(temp, 'g'), '');
+				s = UnifyNumbers(s);
+			};
+			// Arabic to Latin
+			if (document.getElementById('itemA2L').className == 'nav-item active') {
+				s = NormalizeKurdish(s);
+				var harf = '\u0620-\u064A\u066E-\u06D5\u06FA-\u06FF\u0750-\u077F'; //\u08A0-u08FF
+				var V = 'aeêiîouûü';
+				var C = 'lɫrřmnfhḧjsşṣvxẍzƹcçbdgkpqtʔ';
+				var sConvertArabic2Latin = new Array(
+					'\u200C' + 'و([^' + harf + '])', ' û$1',
+					'([^' + harf + '])و([^' + harf + '])', '$1û$2',
+					'\u200C', ' ',
+					'ئ|ء', 'ʔ',		// Hamza ʔ
+					'آ', 'ʔa',
+					'،', ',',
+					'؛', ';',
+					'«', '\u201C',
+					'»', '\u201D',
+					'٠|۰', '0',
+					'١|۱', '1',
+					'٢|۲', '2',
+					'٣|۳', '3',
+					'٤|۴', '4',
+					'٥|۵', '5',
+					'٦|۶', '6',
+					'٧|۷', '7',
+					'٨|۸', '8',
+					'٩|۹', '9',
+					'ا', 'a',
+					'ب', 'b',
+					'پ', 'p',
+					'ت|ط', 't',
+					'ج', 'c',
+					'چ', 'ç',
+					'ح', 'ḧ',
+					'خ', 'x',
+					'د', 'd',
+					'ر', 'r',
+					'ڕ', 'ř',
+					'ز|ض|ظ|ذ', 'z',
+					'ژ', 'j',
+					'س|ث', 's',
+					'ش', 'ş',
+					'ص', 'ṣ',
+					'ع', 'ƹ',
+					'غ', 'ẍ',
+					'ف', 'f',
+					'ڤ', 'v',
+					'ق', 'q',
+					'ک|ك', 'k',
+					'گ', 'g',
+					'ل', 'l',
+					'ڵ', 'ɫ',
+					'م', 'm',
+					'ن', 'n',
+					'ۆ', 'o',
+					'ۊ', 'ü',
+					'ھ|ه', 'h',
+					'ە', 'e',
+					'ێ', 'ê',
+					'َ', 'e',	// فتحه
+					'ِ', 'i',	// کسره
+					'ُ', 'u',	// ضمه
+
+					//// managing و and ی
+					'ى|ي', 'ی', // standardise ی
+
+					// adjacent to vowel is consonant
+					'و' + '([' + V + '])', 'w$1',
+					'ی' + '([' + V + '])', 'y$1',
+					'([' + V + '])' + 'ی', '$1y',
+					'([' + V + '])' + 'و', '$1w',
+
+					// word starts with consonant
+					'(^|[^وی' + C + V + 'wy])و', '$1w',
+					'(^|[^وی' + C + V + 'wy])ی', '$1y',
+
+					//triples
+					'ییی', 'yîy',
+					'یوی', 'îwî',
+					'([wy' + C + '])' + 'ووو', '$1ûw',
+					'([' + V + '])' + 'ووو', '$1wû',
+					'یوو', 'yû',
+					'ووی', 'ûy',
+					'w' + 'وی', 'wwî',
+					'ویو', 'wîw',
+					'ûyو', 'ûyو',
+
+					//doubles
+					'وی([wy' + C + '])', 'wî$1',
+					'وی', 'wî',
+					'یو', 'îw',
+					'([wy' + C + '])' + 'یی' , '$1îy',
+					'([' + V + '])' + 'یی' , '$1yî',
+					'([' + V + '])' + 'وو' + '([wy' + C + V + '])', '$1ww$2',
+					'([wy' + C + '])' + 'وو' + '($|[^' + V + '])', '$1û$2',
+					'([wy' + C + '])' + 'وو' + '([' + V + '])', '$1uw$2',
+
+					// singles
+					'و' + '([' + V + '])', 'w$1',
+					'ی' + '([' + V + '])', 'y$1',
+					'([' + V + '])' + 'ی', '$1y',
+					'([' + V + '])' + 'و', '$1w',
+					'و', 'u',
+					'ی', 'î',
+					'ـ', '',	// تطویل
+					'؟', '?'
+				);
+				for (var i = 0; i < sConvertArabic2Latin.length; i += 2)
+					s = s.replace(new RegExp(sConvertArabic2Latin[i], 'gim'), sConvertArabic2Latin[i + 1]);
+
+				// /i/ epenthesis
+				var NL = '[^wy' + C + V + ']'; //Non-Letter
+				var iEpenthesis = new Array(
+					'(^|' + NL + ')([' + C + ']) ', '$1$2i ', // çi
+					'(^|' + NL + ')([' + C + 'wy])([' + C + '])', '$1$2i$3', // çil
+					'([' + V + '])([wylɫrřmnfhḧjsşṣvxẍzƹcç])([bdgkpqtʔ])([wylɫrřmnfhḧjsşṣvxẍzƹcç])', '$1$2$3i$4', //girtn > girtin
+					'([' + V + '])([lɫrřmnfhḧjsşṣvxẍzƹcçbdgkpqtʔ])([fhḧjsşṣvxẍzƹcçbdgkpqtʔ])([cçbdgkpqtʔ])', '$1$2i$3$4', //zanst > zanist
+					'([' + V + '])([wylɫrř])([mnfhḧjsşṣvxẍzƹ])([cçbdgkpqtʔ])([^aeêiîouû]|$)', '$1$2i$3$4$5', //birnc > birinc
+					'([' + V + '])([fhḧjsşṣvxẍzƹ])([lɫrřmn])([cçbdgkpqtʔ])([^aeêiîouû]|$)', '$1$2$3i$4$5', //cejnt > cejnit
+					'([' + V + '])([jsşṣvxẍzƹcçbdgkpqtʔ])([wylɫrřmnfhḧjsşṣvxẍzƹcç])([^aeêiîouû]|$)', '$1$2i$3$4', //hatm > hatim
+					'([' + V + '])([lɫrřmnfhḧjsşṣvxẍzƹcçbdgkpqtʔ])([lɫrřmn])($|' + NL + ')', '$1$2i$3$4', //befr > befir //kemn > kemin
+					'(^|' + NL + ')ʔ', '$1',	//Hamza
+					'ƹ', '\u0027',	//ع
+					'ʔ', '\u0027'	//Hamza
+					);
+				for (var i = 0; i < iEpenthesis.length; i += 2)
+					s = s.replace(new RegExp(iEpenthesis[i], 'gim'), iEpenthesis[i + 1]);
+				// Central Kurdish Phoneme Type 
+				if (document.getElementById('CentralPhonemeType').value == 'digraph'){
+					var sDigraphs = new Array(
+						'ḧ', 'hh',
+						'ẍ', 'gh',
+						'ɫ', 'll',
+						'(^|[^aeêiîouûlɫrřmnfhḧjsşṣvxẍzƹcçbdgkpqtʔ])ř', '$1r',
+						'ř', 'rr'
+						);
+					for (var i = 0; i < sDigraphs.length; i += 2)
+						s = s.replace(new RegExp(sDigraphs[i], 'gim'), sDigraphs[i + 1]);
+				}
+				else if (document.getElementById('CentralPhonemeType').value == 'reduced'){
+						s = s.replace('ḧ', 'h');
+						s = s.replace('ẍ', 'x');
+						s = s.replace('ɫ', 'l');
+						s = s.replace('ř', 'r');
+				};
+			};
+			document.getElementById('outputTransliteration').className = "pre";
+			document.getElementById('outputTransliteration').innerHTML = s;
+			document.getElementById('btnCopyTransliteration').className = 'btn-danger';
+			document.getElementById('btnClearTransliteration').className ='btn-light';
+		}
+		else {
+			clearAll();
+		};
+	};
+	function CopyOutput() {
+		var text = document.getElementById('outputTransliteration');
+		if (document.body.createTextRange) { //ms
+			var range = document.body.createTextRange();
+			range.moveToElementText(text);
+			range.select();
+		} else if (window.getSelection) { //all others
+			var selection = window.getSelection();
+			range = document.createRange();
+			range.selectNodeContents(text);
+			selection.removeAllRanges();
+			selection.addRange(range);
+		}
+		document.execCommand("copy");
+	}
+	function NormalizeKurdish(s){
+		var harf = '\u0620-\u064A\u066E-\u06D5\u06FA-\u06FF\u0750-\u077F'; //\u08A0-u08FF
+		var haraka = '\u064B-\u065F';
+		var Corrections = new Array(
+			'ي|ى|ے', 'ی',
+			'ك|ڪ', 'ک',
+			'(\u201C|\\(\\()', '«',
+			'(\u201D|\\)\\))', '»',
+			'([^ ])  ([^ ])', '$1 $2',
+			'\u200c{2,}', '\u200c',				//omit multiple ZWNJ
+			'\u06BE([^ـ' + harf + haraka + '])', 'هـ$1',
+			'\u06BE', 'ه',
+			'\u0647\u200C', '\u06D5',			// 0647 + ZWNJ > E
+			'\u0647\u200D', 'هـ',				// 0647 + ZWJ > H
+			'([ءادرڕزژوۆە])\u200C', '$1',		// unnecessary ZWNJ
+			'\u0647([^ـ' + harf + haraka + '])', '\u06D5$1',		// isolated and final Heh > E
+			'\u200Cو ', ' و ',
+			'([' + harf + '])\u200C([^' + harf + '])', '$1$2',	//remove unnecessary ZWNJ
+			'ـ{2,}', 'ـ',			// duplicated Tatweel
+			'ـ' + '([ئبپتجچحخسشعغفڤقکگلڵمنهیێءادرڕزژۆە])', '$1',		// delete unnecessary Tatweel
+			'([بپتجچحخسشعغفڤقکگلڵمنیێ])' + 'ـ', '$1',		// delete unnecessary Tatweel
+			'(^|[^هئ])' + 'ـ', '$1-'		// Tatweel to dash
+		);
+		for (var i = 0; i < Corrections.length; i += 2)
+			s = s.replace(new RegExp(Corrections[i], 'g'), Corrections[i + 1]);
+		return s;
+	};	
+	function UnifyNumbers(s) {
+		var sNumbers = new Array(
+			'0', '۰', '٠',
+			'1', '۱', '١',
+			'2', '۲', '٢',
+			'3', '۳', '٣',
+			'4', '۴', '٤',
+			'5', '۵', '٥',
+			'6', '۶', '٦',
+			'7', '۷', '٧',
+			'8', '۸', '٨',
+			'9', '۹', '٩'
+		);
+		if (document.getElementById('NumTypeTransliteration').value == 'Arabic') {
+			for (var i = 0; i < sNumbers.length; i += 3)
+				s = s.replace(new RegExp(sNumbers[i] + '|' + sNumbers[i + 1], 'g'), sNumbers[i + 2]);
+		};
+		if (document.getElementById('NumTypeTransliteration').value == 'Latin') {
+			for (var i = 0; i < sNumbers.length; i += 3)
+				s = s.replace(new RegExp(sNumbers[i + 2] + '|' + sNumbers[i + 1], 'g'), sNumbers[i]);
+		};
+		return s;
+	};
+	function clearAll() {
+		document.getElementById('inputTransliteration').value = '';
+		document.getElementById('outputTransliteration').innerHTML = '';
+		document.getElementById('outputTransliteration').className = 'hidden';
+		document.getElementById('btnCopyTransliteration').className = 'hidden';
+		document.getElementById('btnClearTransliteration').className = 'hidden';
+	};
+</script>
+</body>
+</html>
