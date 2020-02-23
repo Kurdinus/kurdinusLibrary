@@ -61,7 +61,6 @@ export const sConvertLatin2Arabic = new Array(
     '\;', '؛'
 );
 
-export const harf = '\u0620-\u064A\u066E-\u06D5\u06FA-\u06FF\u0750-\u077F'; //\u08A0-u08FF
 export const haraka = '\u064B-\u065F';
 export const Corrections = new Array(
     'ي|ى|ے', 'ی',

@@ -1,0 +1,29 @@
+{
+  "name": "kurdinus",
+  "description": "a helper for Kurdish language conversion between different Kurdî alphabets",
+  "version": "1.0.0",
+  "main": "index.html",
+  "module": "es2015",
+  "scripts": {
+    "test": "jest --config=jest.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aso-mehmudi/kurdinus.git"
+  },
+  "keywords": [
+    "Kurdish"
+  ],
+  "author": "Aso Mahmudi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aso-mehmudi/kurdinus/issues"
+  },
+  "homepage": "https://github.com/aso-mehmudi/kurdinus#readme",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0"
+  }
+}

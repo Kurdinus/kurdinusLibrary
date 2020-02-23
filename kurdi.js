@@ -1,12 +1,23 @@
-import './kurdi.constants';
+import {
+    LATIN,
+    ARABIC,
+    DIACRITICAL,
+    sSuffixes,
+    sNumbers,
+    ltr,
+    temp,
+    krmSuffix,
+    sDigraphs1,
+    sConvertLatin2Arabic
+} from './kurdi.constants';
 
 export default class Kurdi {
 
     static convertLatinToArabic(text, digraphType = DIACRITICAL) {
         let sourceText = text.toLowerCase();
         sourceText = sourceText.replace(new RegExp(sSuffixes, 'gim'), '$1$2');
-        sSuffixes = '([^' + ltr + '])(' + krmSuffix + ')($|[^' + ltr + '])' //e.g. (nav)ê "nav"ê
-        sourceText = sourceText.replace(new RegExp(sSuffixes, 'gim'), '$1' + temp + '$2$3');
+        let sSuffixesNew = '([^' + ltr + '])(' + krmSuffix + ')($|[^' + ltr + '])' //e.g. (nav)ê "nav"ê
+        sourceText = sourceText.replace(new RegExp(sSuffixesNew, 'gim'), '$1' + temp + '$2$3');
 
         if (digraphType == DIACRITICAL) {
             for (var i = 0; i < sDigraphs1.length; i += 2) {
