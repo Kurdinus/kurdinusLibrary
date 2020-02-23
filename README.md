@@ -25,3 +25,15 @@ Converting Kurdish texts to Unicode standard typed in non-Unicode fonts:
 
 ## Kurdish Typing
 Type Kurdish just by click or touch, without any keyboard layout installed on the device.
+
+
+# Developent
+
+* Run: 
+open `index.hmtl` in a decent browser. (i.e FireFox, Chrome , etc)
+
+* Prepare Dev env:
+run `npm install`
+
+* Test: 
+run `npm test`
