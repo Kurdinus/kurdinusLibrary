@@ -29,11 +29,11 @@ Type Kurdish just by click or touch, without any keyboard layout installed on th
 
 # Developent
 
-* Run: 
-open `index.hmtl` in a decent browser. (i.e FireFox, Chrome , etc)
-
 * Prepare Dev env:
 run `npm install`
+
+* Run: 
+run `npm run serve`; therefore, open http://localhost/ in a decent browser. (i.e FireFox, Chrome , etc)
 
 * Test: 
 run `npm test`
