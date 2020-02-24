@@ -395,7 +395,7 @@ function ChangeCase(text, caseType){
 				return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase();})
 			break;
 		case 'sentence':
-			return  text.replace(/[a-zêîûçşéúıŕřĺɫƚḧẍḍṿ].+?[\.?!:\n]/gm, function (t) {
+			return  text.replace(/[a-zêîûçşéúıŕřĺɫƚḧẍḍṿ].+?([\.?!:\n]|$)/gm, function (t) {
 				return t.charAt(0).toUpperCase() + t.substr(1);});
 			break;
 		default:
