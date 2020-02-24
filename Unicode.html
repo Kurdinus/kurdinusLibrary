@@ -57,6 +57,7 @@
 		– <a href="https://www.facebook.com/kurdinus/" target="_blank">Facebook</a>
 		– <a href="https://www.github.com/aso-mehmudi/kurdinus/" target="_blank">GitHub</a>
 	</div>
+<script src="Kurdinus.js"></script>
 <script type="text/javascript">
 	function initialize(){
 		ChangeFontType('AliK');
@@ -103,102 +104,25 @@
 	}
 	function Font2Unicode() {
 		if (document.getElementById('inputUnicode').value != ''){
-			var sAliK = new Array(
-				'لاَ|لآ|لاً', 'ڵا',
-				'لً|لَ|لأ', 'ڵ',
-				'ة', 'ە',
-				"ه" + "([^ئابپتجچحخدرڕزژسشعغفڤقکگلڵمنوۆەهیێأإآثذصضطظكيىةڎۊؤ]|$)", "هـ$1",
-				'للهـ', 'لله',
-				'ض', 'چ',
-				'ث', 'پ',
-				'ظ', 'ڤ',
-				'ط', 'گ',
-				'ىَ|يَ|یَ|آ', 'ێ',
-				'رِ', 'ڕ',
-				'ؤ|وَ', 'ۆ',
-				'ي|ى', 'ی',
-				'ء', '\u200Cو',
-				'ِ', '',
-				'ك', 'ک',
-				'ذ', 'ژ'
-				);
-			var sAliWeb = new Array(
-				'لاَ|لآ|لاً', 'ڵا',
-				'لَ|پ', 'ڵ',
-				'ة', 'ە',
-				"ه" + "([^ئابپتجچحخدرڕزژسشعغفڤقکگلڵمنوۆەهیێأإآثذصضطظكيىةڎۊؤ]|$)", "هـ$1",
-				'رِ|أ', 'ڕ',
-				'ؤ|وَ', 'ۆ',
-				'يَ|یَ', 'ێ',
-				'ص', 'ێ',
-				'ي', 'ی',
-				'ط', 'ڭ', //swap ط and گ
-				'گ', 'ط', //
-				'ڭ', 'گ', //
-				'ض', 'چ',
-				'ث', 'پ',
-				'ظ', 'ڤ',
-				'ْ|ُ', '',
-				'ى', '*',
-				'ك', 'ک',
-				'ذ', 'ژ'
-			);
-			var sDylan = new Array(
-				'لإ|لأ|لآ', 'ڵا',
-				'ؤ|وَ', 'ۆ',
-				'ة', 'ە',
-				'ض', 'ڤ',
-				'ص', 'ڵ',
-				'ث', 'ێ',
-				'ؤ', 'ۆ',
-				'ي|ى', 'ی',
-				'ك', 'ک',
-				'ذ', 'ڕ'
-			);
-			var s = document.getElementById('inputUnicode').value;
+			var text = document.getElementById('inputUnicode').value;
+			
 			if(document.getElementById('itemAliK').className == "nav-item active"){
-				for (var i = 0; i < sAliK.length; i += 2)
-					s = s.replace(new RegExp(sAliK[i], 'g'), sAliK[i + 1]);
+				text = ConvertFont2Unicode(text, 'AliK');
 			}
 			if(document.getElementById('itemAliWeb').className == "nav-item active"){
-				for (var i = 0; i < sAliWeb.length; i += 2)
-					s = s.replace(new RegExp(sAliWeb[i], 'g'), sAliWeb[i + 1]);
+				text = ConvertFont2Unicode(text, 'AliWeb');
 			}
 			if(document.getElementById('itemKDylan').className == "nav-item active"){
-				for (var i = 0; i < sDylan.length; i += 2)
-					s = s.replace(new RegExp(sDylan[i], 'g'), sDylan[i + 1]);
+				text = ConvertFont2Unicode(text, 'Dylan');
 			}
-			s = UnifyNumbers(s);
+			text = UnifyNumbers(text, document.getElementById('NumTypeUnicode').value);
 			document.getElementById('outputUnicode').className = "pre";
-			document.getElementById('outputUnicode').innerHTML = s;
+			document.getElementById('outputUnicode').innerHTML = text;
 			document.getElementById('btnCopyUnicode').className = 'btn-danger';
 			document.getElementById('btnClearUnicode').className ='btn-light';
 		} else {
 			clearAll('Unicode');
 		};
-	};
-	function UnifyNumbers(s) {
-		var sNumbers = new Array(
-			'0', '۰', '٠',
-			'1', '۱', '١',
-			'2', '۲', '٢',
-			'3', '۳', '٣',
-			'4', '۴', '٤',
-			'5', '۵', '٥',
-			'6', '۶', '٦',
-			'7', '۷', '٧',
-			'8', '۸', '٨',
-			'9', '۹', '٩'
-		);
-		if (document.getElementById('NumTypeUnicode').value == 'Arabic') {
-			for (i = 0; i < sNumbers.length; i += 3)
-				s = s.replace(new RegExp(sNumbers[i] + '|' + sNumbers[i + 1], 'g'), sNumbers[i + 2]);
-		};
-		if (document.getElementById('NumTypeUnicode').value == 'Latin') {
-			for (i = 0; i < sNumbers.length; i += 3)
-				s = s.replace(new RegExp(sNumbers[i + 2] + '|' + sNumbers[i + 1], 'g'), sNumbers[i]);
-		};
-		return s;
 	};
 	function clearAll() {
 		document.getElementById('inputUnicode').value = '';
