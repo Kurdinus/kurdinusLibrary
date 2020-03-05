@@ -25,3 +25,7 @@ Converting Kurdish texts to Unicode standard typed in non-Unicode fonts:
 
 ## Kurdish Typing
 Type Kurdish just by click or touch, without any keyboard layout installed on the device.
+
+## Development
+
+* to run  `npm start`
