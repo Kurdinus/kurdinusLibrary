@@ -4,6 +4,7 @@
   "description": "JavaScript tools for normalization and transliteration of Kurdish texts http://kurdinus.com/",
   "main": "index.html",
   "scripts": {
+    "start": "http-server -p 80",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/aso-mehmudi/kurdinus/issues"
   },
-  "homepage": "https://github.com/aso-mehmudi/kurdinus#readme"
+  "homepage": "https://github.com/aso-mehmudi/kurdinus#readme",
+  "devDependencies": {
+    "http-server": "^0.12.1"
+  }
 }
