@@ -1,0 +1,24 @@
+{
+  "name": "kurdinus",
+  "version": "1.0.0",
+  "description": "JavaScript tools for normalization and transliteration of Kurdish texts http://kurdinus.com/",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aso-mehmudi/kurdinus.git"
+  },
+  "keywords": [
+    "kurdi",
+    "keyboard",
+    "language"
+  ],
+  "author": "Aso Mahmudi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aso-mehmudi/kurdinus/issues"
+  },
+  "homepage": "https://github.com/aso-mehmudi/kurdinus#readme"
+}
