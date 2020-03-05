@@ -28,4 +28,5 @@ Type Kurdish just by click or touch, without any keyboard layout installed on th
 
 ## Development
 
+* prepare dev env `npm install`
 * to run  `npm start`
