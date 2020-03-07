@@ -1,4 +1,4 @@
-import Converter from '../../src/converters/Converter.js';
+import Converter from '@/converters/Converter.js';
 
 class InvalidDerived extends Converter {
 
@@ -6,7 +6,7 @@ class InvalidDerived extends Converter {
 
 class ValidDerived extends Converter {
   convert(text) {
-    
+
   }
 }
 

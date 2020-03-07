@@ -1,5 +1,5 @@
-import { CaseType, FontType, NumerlaType, PhonemeType } from '../src/enums';
-import * as Kurdinus from '../src/Kurdinus.js';
+import { CaseType, FontType, NumerlaType, PhonemeType } from '@/enums';
+import * as Kurdinus from '@/Kurdinus.js';
 
 describe('Sanity tests', ()=> {
   test('it should returns the module', ()=> {

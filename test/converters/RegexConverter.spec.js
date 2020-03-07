@@ -1,4 +1,4 @@
-import RegexConverter from '../../src/converters/RegexConverter.js';
+import RegexConverter from '@/converters/RegexConverter.js';
 
 describe('regex converter', () => {
   it('should return same input when its empty', () => {
