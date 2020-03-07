@@ -13,8 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: install dependencies
+      run:  npm install
+
+    - name: unit test
+      run: npm run test
+
     - name: build library
-      run: |
-        npm install
-        npm run build
-        npm run tests
+      run: npm run build
