@@ -6,12 +6,11 @@ import {
 
 export default class NorthernSpaceRemover extends RegexConverter {
     constructor(){
-        super();
-        this.conversions= [
+        super([
             {
                 regex: ' ' + '(' + KURMANCI_SUFFIXES + ')($|[^' + LATIN_LETTERS + '])',
                 to: '$1$2'
             }
-        ]
+        ]);
     }
 }

@@ -7,12 +7,11 @@ import {
 
 export default class YeSpaceRemover extends RegexConverter {
     constructor(){
-        super();
-        this.conversions = [
+        super([
             {
                 regex : '([^' + LATIN_LETTERS + '])(' + KURMANCI_SUFFIXES + ')($|[^' + LATIN_LETTERS + '])',
                 to: '$1' + SUFFIX_MERGE_DIVIDER + '$2$3'
             }
-        ]
+        ]);
     }
 }
