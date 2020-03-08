@@ -3,6 +3,7 @@ import { CaseType, FontType, NumerlaType, PhonemeType } from './enums';
 
 import * as Latin from './converters/latin';
 import * as Arabic from './converters/arabic';
+import { Fonts } from './converters/arabic/fonts'
 import * as Common from './converters';
 
 const arabicNormalizer = new Arabic.ArabicNormalizer();
@@ -18,6 +19,10 @@ export function normalizeArabicLetters(text) {
 
 export function normalizePunctuations(text) {
 	return punctuationNormalizer.convert(text);
+}
+
+export function getArabicLayoutUnicode(text, fontType) {
+	return Fonts[fontType].convert(text);
 }
 
 export { CaseType, FontType, NumerlaType, PhonemeType };
