@@ -6,11 +6,19 @@ import * as Arabic from './converters/arabic';
 import { Fonts } from './converters/arabic/fonts'
 import * as Common from './converters';
 
+
+const punctuationNormalizer = new Common.PunctuationNormalizer();
+
 const arabicNormalizer = new Arabic.ArabicNormalizer();
 const basicArabicConverter = new Arabic.BasicArabicConverter();
 const uncertainVowelsConverter = new Arabic.UncertainVowelsConverter();
 const shortVowelEpenthesisConverter = new Arabic.ShortVowelEpenthesisConverter();
-const punctuationNormalizer = new Common.PunctuationNormalizer();
+
+const lowercaseConverter = new Latin.CaseConverter(CaseType.LOWER);
+const northernSpaceRemover = new Latin.NorthernSpaceRemover();
+const yeSpaceRemover = new Latin.YeSpaceRemover();
+const diacriticalConverter = new Latin.DiacriticalConverter();
+
 const phonemeConverter = {
 	[PhonemeType.DIAGRAPH]: new Arabic.PhonemeConverter(PhonemeType.DIAGRAPH),
 	[PhonemeType.REDUCED]: new Arabic.PhonemeConverter(PhonemeType.REDUCED),
@@ -43,5 +51,15 @@ export function transliterateArabicToLatin(text, phonemeType) {
 	return text;
 }
 
+export function transliterateLatinToArabic(text, isDigraphType){
+	text = lowercaseConverter.convert(text);
+	text = northernSpaceRemover.convert(text);
+	text = yeSpaceRemover.convert(text);
+	if (isDigraphType){
+		text = diacriticalConverter.convert(text);
+	}
+	text = text.replace(new RegExp(Constants.SUFFIX_MERGE_DIVIDER, 'g'), ''); // TODO: it should removed in that scope of code
+	return text;
+}
 
 export { CaseType, FontType, NumerlaType, PhonemeType };
