@@ -6,7 +6,6 @@ import * as Arabic from './converters/arabic';
 import { Fonts } from './converters/arabic/fonts'
 import * as Common from './converters';
 
-
 const punctuationNormalizer = new Common.PunctuationNormalizer();
 
 const arabicNormalizer = new Arabic.ArabicNormalizer();
@@ -23,7 +22,6 @@ const phonemeConverter = {
 	[PhonemeType.DIAGRAPH]: new Arabic.PhonemeConverter(PhonemeType.DIAGRAPH),
 	[PhonemeType.REDUCED]: new Arabic.PhonemeConverter(PhonemeType.REDUCED),
 }
-
 
 export function changeCase(text, caseType){
 	return new Latin.CaseConverter(caseType).convert(text)
