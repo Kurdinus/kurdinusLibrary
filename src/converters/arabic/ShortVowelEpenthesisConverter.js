@@ -15,6 +15,6 @@ export default class ShortVowelEpenthesisConverter extends RegexConverter {
             { regex: '(^|' + NON_LETTERS + ')ʔ', to: '$1'},	//Hamza
             { regex: 'ƹ', to: '\u0027'},	//ع
             { regex: 'ʔ', to: '\u0027'}	//Hamza
-        ])
+        ]);
     }
 }
