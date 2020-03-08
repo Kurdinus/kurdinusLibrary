@@ -1,5 +1,5 @@
 # Kurdînûs 2019
-Kurdînûs 2019 is pure JavaScript tools for Kurdish language texts. 
+Kurdînûs 2019 is pure JavaScript tools for Kurdish language texts.
 
 Kurdînûs is:
 - platform independent (just needs a browser)
@@ -30,3 +30,10 @@ Type Kurdish just by click or touch, without any keyboard layout installed on th
 
 * prepare dev env `npm install`
 * to run  `npm start`
+
+### Library
+#### how to build:
+* run `npm run build`
+
+#### how to test:
+* run `npm run test `
