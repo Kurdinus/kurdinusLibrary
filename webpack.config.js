@@ -7,5 +7,11 @@ module.exports = {
     library: 'Kurdinus',
     libraryTarget: 'window',
     path: path.resolve(__dirname, 'dist')
+  },
+  resolve: {
+    extensions: ['.js', '.json'],
+    alias: {
+      '@': path.resolve('src'),
+    }
   }
 }
